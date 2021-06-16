@@ -19,13 +19,17 @@ public final class MovieNetworkLite implements IMovie {
     @SerializedName("id")
     private int movieId;
 
+    @SerializedName("title")
+    private String movieTitle;
+
     MovieNetworkLite() {
     }
 
-    public MovieNetworkLite(float voterAverage, String moviePoster, int movieId) {
+    public MovieNetworkLite(float voterAverage, String moviePoster, int movieId, String movieTitle) {
         this.voterAverage = voterAverage;
         this.moviePoster = moviePoster;
         this.movieId = movieId;
+        this.movieTitle = movieTitle;
     }
 
     @Override
@@ -44,11 +48,17 @@ public final class MovieNetworkLite implements IMovie {
     }
 
     @Override
+    public String getMovieTitle() {
+        return movieTitle;
+    }
+
+    @Override
     public String toString() {
         return "MovieNetworkLite{" +
                 "voterAverage=" + voterAverage +
                 ", moviePoster='" + moviePoster + '\'' +
                 ", movieId=" + movieId +
+                ", movieTitle='" + movieTitle + '\'' +
                 '}';
     }
 

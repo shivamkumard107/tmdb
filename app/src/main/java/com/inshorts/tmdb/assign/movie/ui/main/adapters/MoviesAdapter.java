@@ -1,8 +1,10 @@
 package com.inshorts.tmdb.assign.movie.ui.main.adapters;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 import com.inshorts.tmdb.assign.movie.R;
 import com.inshorts.tmdb.assign.movie.model.IMovie;
 import com.inshorts.tmdb.assign.movie.model.Movie;
@@ -71,6 +74,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         ImageView mPosterImage;
         @BindView(R.id.tv_rating_cardlabel)
         TextView mMovieRatings;
+        @BindView(R.id.tv_movie_name)
+        TextView mMovieName;
 
         MoviesViewHolder(final View itemView) {
             super(itemView);
@@ -103,6 +108,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
                     .into(mPosterImage);
             String rating = " " + movie.getVoterAverage() + " ";
             mMovieRatings.setText(rating);
+            mMovieName.setText(movie.getMovieTitle());
         }
     }
 

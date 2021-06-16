@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -22,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.parceler.Parcels;
 
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements BookmarkMoviesCal
     private List<Movie> bookmarkMovies;
     private MainViewModel mMainViewModel;
     private SearchView searchView;
+    private boolean doubleBackToExitPressedOnce = false;
 
     @BindView(R.id.progressbar_movies_loading)
     ProgressBar pbLoadMovies;
@@ -76,12 +80,19 @@ public class MainActivity extends AppCompatActivity implements BookmarkMoviesCal
 
     @Override
     public void onBackPressed() {
-        Log.d(TAG, "onBackPressed: " + searchView.isIconified());
         if (!searchView.isIconified()) {
             searchView.setIconified(true);
             searchView.onActionViewCollapsed();
         } else {
-            super.onBackPressed();
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
+            }
+
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, 2000);
         }
     }
 

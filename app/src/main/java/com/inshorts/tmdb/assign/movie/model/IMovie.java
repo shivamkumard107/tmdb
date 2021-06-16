@@ -8,5 +8,7 @@ public interface IMovie {
     float getVoterAverage();
 
     int getMovieId();
+
+    String getMovieTitle();
 }
 
