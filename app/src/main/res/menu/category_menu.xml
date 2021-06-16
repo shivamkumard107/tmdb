@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_sort_top_rated"
+        android:title="@string/action_sort_top_rated"
+        android:orderInCategory="1"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_sort_now_playing"
+        android:title="@string/action_sort_now_playing"
+        android:orderInCategory="3"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_sort_bookmark"
+        android:title="@string/action_sort_bookmarks"
+        android:orderInCategory="4"
+        app:showAsAction="never"/>
+</menu>
