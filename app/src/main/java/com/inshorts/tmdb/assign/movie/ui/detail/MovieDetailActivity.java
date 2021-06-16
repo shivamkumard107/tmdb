@@ -110,7 +110,7 @@ public class MovieDetailActivity extends AppCompatActivity implements MovieDetai
             mMoviePoster = intent.getStringExtra(KEY_MOVIE_POSTER);
             mIsBookmark = intent.getBooleanExtra(KEY_MOVIE_IS_FAVOURITE, false);
         }
-        DetailViewModelFactory vDetailViewModelFactory = InjectorUtils.provideDetailViewModelFactory(this, this);
+        DetailViewModelFactory vDetailViewModelFactory = InjectorUtils.provideDetailViewModelFactory(this);
         detailViewModel = ViewModelProviders.of(this, vDetailViewModelFactory).get(DetailViewModel.class);
         checkIfBookmark(mMovieId);
         if (uri != null) {
@@ -286,7 +286,7 @@ public class MovieDetailActivity extends AppCompatActivity implements MovieDetai
         vCollapsingToolbarLayout.setTitleEnabled(false);
         tvMovieTitle.setText(movie.getMovieTitle());
         rbMovieRating.setRating(movie.getVoterAverage() / 2);
-        tvReleaseDate.setText(movie.getMovieReleaseDate());
+        tvReleaseDate.setText(getApplication().getResources().getString(R.string.label_release_date).concat(movie.getMovieReleaseDate()));
         tvOverview.setText(movie.getMovieOverview());
         setupTrailers(movie.getTrailers());
         setupReviews(movie.getReviews());

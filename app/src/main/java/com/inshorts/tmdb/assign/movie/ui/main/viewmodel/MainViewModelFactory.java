@@ -6,6 +6,10 @@ import androidx.annotation.NonNull;
 
 import com.inshorts.tmdb.assign.movie.MoviesRepository;
 
+import java.util.Map;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 public final class MainViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     private final MoviesRepository mRepository;

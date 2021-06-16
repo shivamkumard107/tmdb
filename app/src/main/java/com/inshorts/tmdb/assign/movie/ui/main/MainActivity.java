@@ -34,6 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import com.inshorts.tmdb.assign.movie.R;
+import com.inshorts.tmdb.assign.movie.di.ViewModelFactoryModule;
 import com.inshorts.tmdb.assign.movie.model.Category;
 import com.inshorts.tmdb.assign.movie.model.IMovie;
 import com.inshorts.tmdb.assign.movie.model.Movie;
@@ -50,13 +51,14 @@ import com.inshorts.tmdb.assign.movie.util.InjectorUtils;
 import com.inshorts.tmdb.assign.movie.util.NetworkUtils;
 import com.inshorts.tmdb.assign.movie.util.ViewUtils;
 
+import javax.inject.Inject;
+
 import static com.inshorts.tmdb.assign.movie.util.Constants.KEY_MOVIE_ID;
 import static com.inshorts.tmdb.assign.movie.util.Constants.KEY_MOVIE_IS_FAVOURITE;
 import static com.inshorts.tmdb.assign.movie.util.Constants.KEY_MOVIE_POSTER;
 
 public class MainActivity extends AppCompatActivity implements BookmarkMoviesCallback,
-        MoviesAdapter.IMovieClickHandler, SharedPreferences.OnSharedPreferenceChangeListener {
-
+        MoviesAdapter.IMovieClickHandler {
 
     private static final String TAG = "MainActivity";
     private final String KEY_APPBAR_TITLE_PERSISTENCE = "movie_category";
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements BookmarkMoviesCal
         ButterKnife.bind(this);
         Toolbar vTbMain = findViewById(R.id.toolbar_main);
         setSupportActionBar(vTbMain);
-        MainViewModelFactory vMainViewModelFactory = InjectorUtils.provideMainViewModelFactory(this, this);
+        MainViewModelFactory vMainViewModelFactory = InjectorUtils.provideMainViewModelFactory(this);
         mMainViewModel = ViewModelProviders.of(this, vMainViewModelFactory).get(MainViewModel.class);
 
         if (savedInstanceState != null && savedInstanceState.containsKey(KEY_MOVIE_LIST_PERSISTENCE)) {
@@ -285,14 +287,5 @@ public class MainActivity extends AppCompatActivity implements BookmarkMoviesCal
         startActivity(vIntent, options.toBundle());
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(getString(R.string.pref_language_key))) {
-//            FIXME Change Language of request
-            String language = sharedPreferences.getString(key, getResources().getString(R.string.pref_language_val_english));
-            Language.setUpLocale(language, this);
-//            new MovieListAsync(mMainViewModel, Category.NOW_PLAYING, this).execute();
-            loadMovies(Category.NOW_PLAYING, 1);
-        }
-    }
+
 }

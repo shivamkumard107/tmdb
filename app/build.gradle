@@ -63,7 +63,6 @@ android {
         //dagger
         implementation dagger.dagger
         annotationProcessor dagger.dagger_compiler
-        implementation dagger.dagger_android
         implementation dagger.dagger_android_support
         annotationProcessor dagger.dagger_processor
 
